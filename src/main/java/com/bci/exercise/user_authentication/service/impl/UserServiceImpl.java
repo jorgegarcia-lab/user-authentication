@@ -52,7 +52,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserSignInResponse signIn(UserRequest userRequest) throws ApplicationException {
-
         User byEmail = Optional.ofNullable(userRepository.findByEmail(userRequest.getEmail()))
                 .orElseThrow(() -> new ApplicationException(
                         ErrorCodes.USER_NON_EXIST.code(),
@@ -66,7 +65,6 @@ public class UserServiceImpl implements UserService {
                         userRequest.getPassword()
                 )
         );
-
         if (!authentication.isAuthenticated()) {
             throw new ApplicationException(
                     ErrorCodes.BAD_CREDENTIALS.code(),
@@ -74,9 +72,7 @@ public class UserServiceImpl implements UserService {
                     Timestamp.from(Instant.now())
             );
         }
-
         return buildUserResponse(byEmail);
-
     }
 
     public UserSignInResponse buildUserResponse(User user){
@@ -115,10 +111,7 @@ public class UserServiceImpl implements UserService {
 
     public String formatDate(){
         Date date = new Date();
-        // Define the desired date format pattern
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a");
-
-        // Format the Date object into a formatted String
         return sdf.format(date);
     }
 

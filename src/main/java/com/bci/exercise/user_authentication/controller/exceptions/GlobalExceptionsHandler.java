@@ -14,9 +14,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 @RestControllerAdvice
@@ -25,7 +23,6 @@ public class GlobalExceptionsHandler {
 
     @ExceptionHandler
     public ResponseEntity<Object> handleApplicationException(ApplicationException cae) {
-
         Error error = Error.builder()
                 .code(cae.getErrorCode())
                 .detail(cae.getErrorMessage())
@@ -33,12 +30,10 @@ public class GlobalExceptionsHandler {
                 .build();
 
         return new ResponseEntity<>(Collections.singletonList(error), HttpStatus.INTERNAL_SERVER_ERROR);
-
     }
 
     @ExceptionHandler
     public ResponseEntity<Object> handleException(Exception e) {
-
         Error error = Error.builder()
                 .timestamp(Timestamp.from(Instant.now()))
                 .detail(ErrorCodes.SYS_ERROR_CODE.message())
@@ -46,7 +41,6 @@ public class GlobalExceptionsHandler {
                 .build();
 
         return new ResponseEntity<>(Collections.singletonList(error), HttpStatus.INTERNAL_SERVER_ERROR);
-
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -71,7 +65,6 @@ public class GlobalExceptionsHandler {
                 .build();
 
         message.ifPresent(error::setDetail);
-
         return new ResponseEntity<>(Collections.singletonList(error), HttpStatus.BAD_REQUEST);
     }
 }

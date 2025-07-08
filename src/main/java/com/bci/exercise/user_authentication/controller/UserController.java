@@ -32,9 +32,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<UserSignUpResponse> registerUser(@Valid @RequestBody UserRequest userRequest) throws ApplicationException {
-
         User byEmail = userService.findByEmail(userRequest.getEmail());
-
         if (byEmail != null) {
             throw new ApplicationException(ErrorCodes.OBJECT_ALREADY_EXISTS.code(),
                     ErrorCodes.OBJECT_ALREADY_EXISTS.message(),

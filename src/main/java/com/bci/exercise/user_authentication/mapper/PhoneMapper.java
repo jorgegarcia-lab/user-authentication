@@ -9,7 +9,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", imports = {Date.class})
 public interface PhoneMapper {
-
     UserPhones convert(Phone phone);
     List<UserPhones> convert(List<Phone> phone);
 }

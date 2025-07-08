@@ -3,7 +3,6 @@ package com.bci.exercise.user_authentication.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Data
 @Builder

@@ -55,10 +55,7 @@ public class User {
     @PrePersist
     private void persistCreatedAt() throws ParseException {
         Date date = new Date();
-        // Define the desired date format pattern
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a");
-
-        // Format the Date object into a formatted String
         String formattedDate = sdf.format(date);
         setCreatedAt(formattedDate);
     }

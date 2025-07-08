@@ -13,7 +13,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserSignInResponse {
-
     private UUID id;
     private String createdAt;
     private String lastLogin;

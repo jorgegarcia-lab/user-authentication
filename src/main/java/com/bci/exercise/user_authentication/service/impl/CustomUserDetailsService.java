@@ -1,5 +1,6 @@
 package com.bci.exercise.user_authentication.service.impl;
 
+import com.bci.exercise.user_authentication.exception.ErrorCodes;
 import com.bci.exercise.user_authentication.model.User;
 import com.bci.exercise.user_authentication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User Not Found with username: " + username);
+            throw new UsernameNotFoundException(ErrorCodes.USER_NON_EXIST.message());
         }
 
         return new org.springframework.security.core.userdetails.User(

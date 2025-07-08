@@ -10,7 +10,6 @@ import lombok.Data;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserPhones {
-
     private long number;
     private int cityCode;
     private String countryCode;

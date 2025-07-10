@@ -72,7 +72,7 @@ Content-Type: application/json
 
 {
   "name": "jorge puerta",
-  "email": "jorge.puerta@globallogic.com",
+  "email": "jorge.puerta@mail.com",
   "password": "a2a1sfGf",
   "phones": [
     {

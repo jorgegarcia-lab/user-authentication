@@ -1,70 +1,70 @@
 # User Authentication
-**Este proyecto es un servicio desarrollado en Java con Spring Boot que permite autenticar usuarios mediante peticiones RESTful utilizando spring-security y JWT.**
+**This is a service implemented in Java with Spring Boot, provide registration and authentication for users by Restful APIs, using spring-security and JWT.**
 
-## Tabla de Contenidos
-- [Descripción](#descripcion)
-- [Tecnologías Usadas](#tecnologias)
-- [Instalación](#instalacion)
-- [Uso](#uso)
+## Content
+- [Description](#description)
+- [Technologies](#technologies)
+- [Instalation](#instalation)
+- [Usage](#usage)
 - [Endpoints](#endpoints)
-- [Configuración](#configuracion)
-- [Licencia](#licencia)
+- [Configuration](#configuration)
+- [License](#license)
 
-## Descripción
-Este es un servicio REST que permite registrar, autenticar y gestionar usuarios utilizando JWT para autenticación.
-- El sistema expone dos endpoints como lo son: /signup y /signin.
-- La autenticación está basada en JSON Web Tokens (JWT), lo que garantiza sesiones seguras y sin estado.
-- Está implementado en Java con Spring Boot y utiliza H2 como base de datos en memoria.
+## Description
+This is a REST service that allows users to register and login, using JWT.
+- The system exposes two endpoints: /signup y /signin.
+- Authentication is based on JSON Web Tokens (JWT), guaranting safer and stateless sessions.
+- It is implemented in JAVA with Spring Boot and uses H2 as an in-memory database.
 
-## Tecnologías Usadas
+## Technologies
 **Backend:** Java 8, Spring Boot
 
-**Base de Datos:** H2 (en memoria)
+**Database:** H2 (en memoria)
 
-**Autenticación:** JWT (JSON Web Tokens)
+**Authentication:** JWT (JSON Web Tokens)
 
-**Seguridad:** Spring Security
+**Security:** Spring Security
 
-**Dependencias:**
+**Dependencies:**
 - Spring Boot Starter Web
 - Spring Boot Starter Security
 - Spring Boot Starter Data JPA
 - JWT (jjwt)
 - H2 Database
 
-## Instalación
-Sigue estos pasos para configurar el proyecto en tu máquina local:
+## Instalation
+Follow these steps to make it run locally:
 
-1. **Clona el repositorio:**
+1. **Clone the repo:**
 
 ```bash
 git clone [https://github.com/usuario/proyecto.git](https://github.com/jorgegarcia-lab/user-authentication/tree/master)
 cd user-authentication
 ```
-Instala dependencias:
+Install dependencies:
 
 ```bash
 ./gradlew build
 ```
-Ejecuta el proyecto:
+Run the project:
 ```bash
 ./gradlew bootRun
 ```
-El servidor se levantará en http://localhost:8081.
-**Las credenciales de spring security son:**
+Server will be up at: http://localhost:8081.
+**Spring security credentials:**
 - user: admin
 - password: admin
 
-## Uso
-Este proyecto está diseñado para interactuar mediante peticiones HTTP a través de RESTful endpoints. A continuación se describen algunos ejemplos de los endpoints disponibles.
+## Usage
+This project is designed to interact throught HTTP request by RESTfull endpoints.
 
 ## Endpoints
-Método	Endpoint	Descripción
-POST	/signup	Registra un nuevo usuario
-POST	/signin	Inicia sesión con email y contraseña
+Method	Endpoint	Description
+POST	/signup	Register a new user
+POST	/signin	Login
 
-Ejemplo de uso:
-Registrar un usuario:
+Example of usage:
+Register an user:
 
 ```bash
 POST http://localhost:8081/signup
@@ -72,7 +72,7 @@ Content-Type: application/json
 
 {
   "name": "jorge puerta",
-  "email": "jorge.puerta@globallogic.com",
+  "email": "jorge.puerta@mail.com",
   "password": "a2a1sfGf",
   "phones": [
     {
@@ -83,7 +83,7 @@ Content-Type: application/json
   ]
 }
 ```
-Respuesta (Success):
+Response (Success):
 
 ```bash
 {
@@ -95,9 +95,9 @@ Respuesta (Success):
 }
 ```
 
-## Configuración
-**Configuración JWT**
-El sistema utiliza un archivo de configuración para definir claves secretas y tiempos de expiración del JWT. Puedes encontrarlo en el archivo JwtConfig.java y en application.properties.
+## Configuration
+**JWT Configuration**
+The system uses a configuration file to define secret keys and timeouts. You can find it in JwgtConfig.java and application.properties.
 
-**Licencia**
-Distribuido bajo la Licencia MIT. Ver LICENSE para más información.
+**License**
+Distributed under MIT licence.

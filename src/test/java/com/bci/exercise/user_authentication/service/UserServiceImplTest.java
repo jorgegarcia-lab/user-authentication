@@ -1,4 +1,4 @@
-package com.bci.exercise.user_authentication;
+package com.bci.exercise.user_authentication.service;
 
 import com.bci.exercise.user_authentication.dto.UserRequest;
 import com.bci.exercise.user_authentication.dto.UserSignInResponse;
@@ -42,13 +42,15 @@ class UserServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        userRequest = new UserRequest();
-        userRequest.setEmail("test@example.com");
-        userRequest.setPassword("password");
+        userRequest = UserRequest.builder()
+                .email("test@example.com")
+                .password("password")
+                .build();
 
-        user = new User();
-        user.setEmail("test@example.com");
-        user.setPassword("encodedPassword");
+        user = User.builder()
+                .email("test@example.com")
+                .password("encodedPassword")
+                .build();
     }
 
     @Test
@@ -59,7 +61,7 @@ class UserServiceImplTest {
         when(authenticationManager.authenticate(any())).thenReturn(authentication);
         when(authentication.isAuthenticated()).thenReturn(true);
 
-        UserSignInResponse response = new UserSignInResponse();
+        UserSignInResponse response = UserSignInResponse.builder().build();
         when(userMapper.convert(user)).thenReturn(response);
 
         UserSignInResponse result = userServiceImpl.signIn(userRequest);
@@ -94,7 +96,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    void signUp_ShouldSaveUserAndReturnResponseWithToken() {
+    void signUp_ShouldSaveUserAndReturnResponseWithToken() throws ApplicationException {
         Authentication authentication = mock(Authentication.class);
         UserDetails userDetails = mock(UserDetails.class);
 
@@ -136,11 +138,14 @@ class UserServiceImplTest {
     }
 
     @Test
-    void findByEmail_ShouldReturnUser() {
-        when(userRepository.findByEmail("test@example.com")).thenReturn(user);
+    void signUp_ShouldThrowException_WhenEmailExists() {
+        when(userRepository.findByEmail(userRequest.getEmail())).thenReturn(User.builder().build());
 
-        User result = userServiceImpl.findByEmail("test@example.com");
+        ApplicationException exception = assertThrows(ApplicationException.class,
+                () -> userServiceImpl.signUp(userRequest));
 
-        assertEquals("test@example.com", result.getEmail());
+        assertEquals(ErrorCodes.OBJECT_ALREADY_EXISTS.message(), exception.getErrorMessage());
     }
+
+
 }

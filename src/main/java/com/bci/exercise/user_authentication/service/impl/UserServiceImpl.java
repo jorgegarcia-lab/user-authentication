@@ -92,7 +92,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserSignUpResponse signUp(UserRequest userRequest) {
+    public UserSignUpResponse signUp(UserRequest userRequest) throws ApplicationException {
+
+        User byEmail = userRepository.findByEmail(userRequest.getEmail());
+        if (byEmail != null) {
+            throw new ApplicationException(ErrorCodes.OBJECT_ALREADY_EXISTS.code(),
+                    ErrorCodes.OBJECT_ALREADY_EXISTS.message(),
+                    Timestamp.from(Instant.now()));
+        }
 
         User user = userMapper.convert(userRequest);
         user.setPassword(encoder.encode(userRequest.getPassword()));
@@ -113,10 +120,5 @@ public class UserServiceImpl implements UserService {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a");
         return sdf.format(date);
-    }
-
-    @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
     }
 }

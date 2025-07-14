@@ -46,7 +46,6 @@ public class WebSecurityConfig {
                                 .antMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated();
         http.headers().frameOptions().disable();
-        // Add the JWT Token filter before the UsernamePasswordAuthenticationFilter
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

@@ -8,6 +8,7 @@ import lombok.*;
 import java.util.List;
 
 @Data
+@Builder
 public class UserRequest {
     private String name;
     private String email;

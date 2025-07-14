@@ -8,6 +8,7 @@
 - [Usage](#usage)
 - [Endpoints](#endpoints)
 - [Configuration](#configuration)
+- [Coverage](#coverage)
 - [License](#license)
 
 ## Description
@@ -99,5 +100,11 @@ Response (Success):
 **JWT Configuration**
 The system uses a configuration file to define secret keys and timeouts. You can find it in JwgtConfig.java and application.properties.
 
-**License**
+## Coverage
+To see coverage report go to:
+```bash
+http://localhost:63342/user-authentication/build/reports/jacoco/test/html/index.html
+```
+
+## License
 Distributed under MIT licence.

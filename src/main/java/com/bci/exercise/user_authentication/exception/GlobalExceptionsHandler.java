@@ -1,8 +1,5 @@
-package com.bci.exercise.user_authentication.controller.exceptions;
+package com.bci.exercise.user_authentication.exception;
 
-import com.bci.exercise.user_authentication.exception.ApplicationException;
-import com.bci.exercise.user_authentication.exception.Error;
-import com.bci.exercise.user_authentication.exception.ErrorCodes;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

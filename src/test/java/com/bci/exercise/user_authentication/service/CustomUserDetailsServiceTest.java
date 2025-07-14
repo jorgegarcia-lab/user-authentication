@@ -1,4 +1,4 @@
-package com.bci.exercise.user_authentication;
+package com.bci.exercise.user_authentication.service;
 
 import com.bci.exercise.user_authentication.exception.ErrorCodes;
 import com.bci.exercise.user_authentication.model.User;
@@ -30,9 +30,10 @@ class CustomUserDetailsServiceTest {
 
     @BeforeEach
     void setUp() {
-        user = new User();
-        user.setEmail(validEmail);
-        user.setPassword("encodedPassword");
+        user = User.builder()
+                .email(validEmail)
+                .password("encodedPassword")
+                .build();
     }
 
     @Test

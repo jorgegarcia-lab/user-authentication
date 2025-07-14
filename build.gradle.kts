@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "2.5.14"
 	id("io.spring.dependency-management") version "1.1.7"
+	jacoco
 }
 
 group = "com.bci.exercise"
@@ -11,6 +12,10 @@ java {
 	toolchain {
 		languageVersion.set(JavaLanguageVersion.of(8))
 	}
+}
+
+jacoco {
+	toolVersion = "0.8.8"
 }
 
 configurations {
@@ -47,6 +52,33 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-json")
 }
 
-tasks.withType<Test> {
+tasks.test {
 	useJUnitPlatform()
+	finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+	dependsOn(tasks.test)
+
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+	}
+
+	classDirectories.setFrom(
+		files(classDirectories.files.map {
+			fileTree(it) {
+				exclude(
+					"com/bci/exercise/user_authentication/constants/**",
+					"com/bci/exercise/user_authentication/dto/**",
+					"com/bci/exercise/user_authentication/exception/**",
+					"com/bci/exercise/user_authentication/mapper/**",
+					"com/bci/exercise/user_authentication/model/**",
+					"com/bci/exercise/user_authentication/repository/**",
+					"com/bci/exercise/user_authentication/security/SecurityConfig.class",
+					"com/bci/exercise/user_authentication/security/WebSecurityConfig.class",
+				)
+			}
+		})
+	)
 }

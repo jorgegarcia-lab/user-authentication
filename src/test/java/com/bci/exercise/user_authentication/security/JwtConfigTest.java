@@ -10,7 +10,7 @@ import org.springframework.test.context.TestPropertySource;
 @SpringBootTest
 @TestPropertySource(properties = {
         "jwt.secret=ijnsduBWDYUBWJNDUYABWFEJNASKJDNqINDFIUNAIindiufnawjnfiunwjfie",
-        "jwt.expiration=1300"
+        "jwt.expiration=5000"
 })
 public class JwtConfigTest {
 
@@ -46,7 +46,7 @@ public class JwtConfigTest {
     @Test
     public void shouldFailOnExpiredToken() throws InterruptedException {
         String token = jwtConfig.generateToken("expireduser");
-        Thread.sleep(1500);
+        Thread.sleep(6000);
         assertFalse(jwtConfig.validateJwtToken(token));
     }
 }

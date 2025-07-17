@@ -14,6 +14,7 @@ import com.bci.exercise.user_authentication.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -59,19 +60,21 @@ public class UserServiceImpl implements UserService {
                         Timestamp.from(Instant.now())
                 ));
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        userRequest.getEmail(),
-                        userRequest.getPassword()
-                )
-        );
-        if (!authentication.isAuthenticated()) {
+        try{
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            userRequest.getEmail(),
+                            userRequest.getPassword()
+                    )
+            );
+        } catch (BadCredentialsException bce) {
             throw new ApplicationException(
                     ErrorCodes.BAD_CREDENTIALS.code(),
                     ErrorCodes.BAD_CREDENTIALS.message(),
                     Timestamp.from(Instant.now())
             );
         }
+
         return buildUserResponse(byEmail);
     }
 
